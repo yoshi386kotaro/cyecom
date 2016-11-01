@@ -1,0 +1,68 @@
+html, body  {
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+#map {
+  width: 100%;
+  height:100%;
+}
+.relative {
+  position: relative;
+}
+.absolute {
+  right: 10px;
+  bottom: 45px;
+  position: absolute;
+}
+.head {
+  top: 5px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  text-align:center;
+  position: absolute;
+}
+.unit {
+  right: 20%;
+  bottom: 10px;
+  text-align:right;
+  position: absolute;
+}
+img.streetview {
+  margin-right:-4px;
+  width:170px;
+  height:300px;
+}
+.largeFont{
+  font-size: large;
+}
+.keyString {
+  font-size: large;
+  text-align:center;
+}
+.valString {
+  font-size: xx-large;
+  text-align:center;
+}
+.half {
+  width: 50%;
+}
+.table {
+  height :100%;
+}
+.tab-content  {
+ height :90%;
+}
+.footer {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+}
+.nav{
+  font-size: xx-large;
+}
