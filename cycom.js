@@ -178,9 +178,9 @@ function init (position){
 
   // ルート
   var overlayGpxRouteLayer =
-    //new L.GPX('route.gpx', {
+    new L.GPX('route.gpx', {
     //new L.GPX('http://latlonglab.yahoo.co.jp/route/get?id=1875c8cd56a2c918eff24406544e0f60&format=gpx', {
-    new L.GPX('http://latlonglab.yahoo.co.jp/route/get?id=cdd9c624ca71506ec5fa8dc1c2a1ce9e&format=gpx', {
+    //new L.GPX('http://latlonglab.yahoo.co.jp/route/get?id=cdd9c624ca71506ec5fa8dc1c2a1ce9e&format=gpx', {
         async: true,
       marker_options: {
         startIconUrl: 'img/pin-icon-start.png',
@@ -231,32 +231,45 @@ function init (position){
       isActiveAmagumo = false;
     }
   });
-  var popup = null;
-  map.on('click',function(event){
-    if(popup != null) map.removeLayer(popup);
 
+
+  //--------------
+  // StreetViewのポップアップ
+  //--------------
+  var popup = null;
+  var isPopStartLock;
+
+  var popUpOption =
+    {
+      maxWidth:730,
+      minWidth:600,
+      maxHeight:350,
+      //keepInView:true,
+    };
+
+  var popupContents = '<div id="streetview" class="streetview""></div>';
+  map.on('click',function(event){
+    if(popup != null) {
+      map.removeLayer(popup);
+      popup = null;
+      $("#lockBtn").prop("checked",isPopStartLock);
+      $("#lockBtnLbl").show();
+      return;
+    }
     lat = event.latlng.lat;
     lng = event.latlng.lng
-    //alert("Lat, Lon : " + lat + ", " + lng);
+    popup = L.popup(popUpOption).setLatLng(event.latlng)
+      .setContent(popupContents).openOn(map);
+    loadStreetView(lat,lng,0);
 
-    popup = L.popup(
-      {
-        maxWidth:730,
-        minWidth:600,
-        maxHeight:350,
-        keepInView:true,
-      }
-    ).setLatLng(event.latlng)
-      .setContent(
-                 '<img class="streetview" src="https://maps.googleapis.com/maps/api/streetview?size=170x300&location=' + lat + ',' + lng + '&heading=270&pitch=0&fov=90" />'
-                 +'<img class="streetview" src="https://maps.googleapis.com/maps/api/streetview?size=170x300&location=' + lat + ',' + lng + '&heading=0&pitch=0&fov=90" />'
-                 +'<img class="streetview" src="https://maps.googleapis.com/maps/api/streetview?size=170x300&location=' + lat + ',' + lng + '&heading=90&pitch=0&fov=90" />'
-                 +'<img class="streetview" src="https://maps.googleapis.com/maps/api/streetview?size=170x300&location=' + lat + ',' + lng + '&heading=180&pitch=0&fov=90" />'
-               ).openOn(map);
-
+    isPopStartLock = $("#lockBtn").prop("checked");
+    $("#lockBtn").prop("checked",true);
+    $("#lockBtnLbl").hide();
   });
 
-
+  //--------------
+  // インターバル処理
+  //--------------
   interval = setInterval(function() {
       // TODO 現在地をAJAXで取得からWebSocketに変更
       $.ajax({
@@ -319,4 +332,25 @@ function createAmagumoUrl() {
  */
 function stopInterval() {
   clearInterval(interval);
+}
+
+/*
+ * ストリートビュー
+ */
+function loadStreetView(lat,lng,direction) {
+      var svp = new google.maps.StreetViewPanorama(
+        document.getElementById("streetview"),
+        {
+            position : new google.maps.LatLng(lat, lng),
+            addressControl: false,
+            linksControl:false,
+            zoomControl:false,
+            clickToGo:false,
+            pov: {
+              heading:direction,
+              pitch:2.0,
+              zoom:0
+            }
+        });
+
 }

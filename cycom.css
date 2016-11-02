@@ -8,12 +8,16 @@ html, body  {
   width: 100%;
   height:100%;
 }
+.halfContent {
+  width: 100%;
+  height:50%;
+}
 .relative {
   position: relative;
 }
 .absolute {
-  right: 10px;
-  bottom: 45px;
+  right: 18px;
+  bottom: 100px;
   position: absolute;
 }
 .head {
@@ -31,9 +35,8 @@ html, body  {
   text-align:right;
   position: absolute;
 }
-img.streetview {
-  margin-right:-4px;
-  width:170px;
+div.streetview {
+  width:680px;
   height:300px;
 }
 .largeFont{
@@ -54,7 +57,11 @@ img.streetview {
   height :100%;
 }
 .tab-content  {
- height :90%;
+ height :100%;
+ padding-bottom: 75px;
+}
+.tab-content>.active  {
+ height :100%;
 }
 .footer {
   position: absolute;
