@@ -73,3 +73,24 @@ div.streetview {
 .nav{
   font-size: xx-large;
 }
+
+.leaflet-bar a,
+.leaflet-bar a:hover{
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+}
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  font-size: 36px;
+}
+.leaflet-control-layers-toggle {
+  width: 80px;
+  height: 30px;
+  font-size: larger;
+  padding-left: 5px;
+  zoom: 1.5;
+}
+.leaflet-control-scale-line {
+  font-size: large;
+}
