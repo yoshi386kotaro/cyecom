@@ -36,6 +36,8 @@ if( navigator.geolocation )
       "maximumAge": 5000 ,
     }
   ) ;
+}else {
+  init(geolocation);
 }
 
 var intervalGps;
@@ -292,7 +294,7 @@ function init (position){
       });
 
       if(isActiveLog) {
-        overlayGpxLogLayer.reload();
+        //overlayGpxLogLayer.reload();
       }
       if(isActiveAmagumo && new Date().getTime() - timeLastGetAmagumo >= 300000) { //5分以上経過していたら取り直す
         overayAmagumo.setUrl(createAmagumoUrl());
