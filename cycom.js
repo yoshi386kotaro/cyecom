@@ -179,8 +179,6 @@ function init (position){
   // ルート
   var overlayGpxRouteLayer =
     new L.GPX('route.gpx', {
-    //new L.GPX('http://latlonglab.yahoo.co.jp/route/get?id=1875c8cd56a2c918eff24406544e0f60&format=gpx', {
-    //new L.GPX('http://latlonglab.yahoo.co.jp/route/get?id=cdd9c624ca71506ec5fa8dc1c2a1ce9e&format=gpx', {
         async: true,
       marker_options: {
         startIconUrl: 'img/pin-icon-start.png',
